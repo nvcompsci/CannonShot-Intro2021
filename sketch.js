@@ -1,17 +1,19 @@
+//define objects and properties
 let cannon = {}
+//x, y, width, vy
 cannon.x = 0
 cannon.y = 200
-cannon.width = 100
-cannon.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQZggUW1fatrwIxecH0HAw6R7k08yQWM9Q7JeW8qKS5SLtgRBM%3Aclipart-library.com%2Fimage_gallery%2F585873.png&usqp=CAU"
-
-let cball = {}
+cannon.width = 75
+cannon.height = 25
+cannon.vy = 2
+cannon.src = "https://cdn.iconscout.com/icon/premium/png-512-thumb/cannon-18-569875.png"
 
 let target = {}
 
-let world = {}
 
 function preload() {
   cannon.img = loadImage(cannon.src)
+  
 }
 
 function setup() {
@@ -19,6 +21,13 @@ function setup() {
 }
 
 function draw() {
-  background('white');
-  image(cannon.img, cannon.x, cannon.y, cannon.width, cannon.width / 2)
+  background("white");
+  
+  updateAndDraw()
+}
+
+function updateAndDraw() {
+  image(cannon.img, cannon.x, cannon.y, cannon.width, cannon.height)
+  //increase y by vy
+  cannon.y += cannon.vy
 }
