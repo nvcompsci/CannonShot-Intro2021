@@ -21,4 +21,10 @@ function setup() {
 function draw() {
   background('white');
   image(cannon.img, cannon.x, cannon.y, cannon.width, cannon.width / 2)
+  
+  update(cannon)
+}
+
+function update(sprite) {
+  sprite.y += 2
 }
