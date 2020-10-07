@@ -13,7 +13,4 @@ function draw() {
   background("white");
 }
 
-
-
-
-
+//groupB period3
