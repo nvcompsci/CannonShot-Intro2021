@@ -17,12 +17,18 @@ cannonBall.src = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/153a
 
 let target = {}
 target.x = 350
+target.y = 300
+target.width = 50
+target.height = 50
+target.vy = 2
+target.src = "https://smeonline.net/wp-content/uploads/target-clipart-target.png"
 
 let world = {}
 
 function preload() {
   cannon.img = loadImage(cannon.src)
   cannonBall.img = loadImage(cannonBall.src)
+  target.img = loadImage(target.src)
 }
 
 function setup() {
@@ -34,6 +40,7 @@ function draw() {
   
   updateAndDraw(cannon)
   updateAndDraw(cannonBall)
+  updateAndDraw(target)
 }
 
 function updateAndDraw(sprite) {
