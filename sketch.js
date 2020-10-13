@@ -5,6 +5,7 @@ cannon.x = 0
 cannon.y = 200
 cannon.width = 75
 cannon.height = 25
+cannon.vx = 0
 cannon.vy = 2
 cannon.src = "https://cdn.iconscout.com/icon/premium/png-512-thumb/cannon-18-569875.png"
 
@@ -13,6 +14,7 @@ target.x = 350
 target.y = 50
 target.width = 40
 target.height = 40
+target.vx = 0
 target.vy = -2
 target.src = "https://lh3.googleusercontent.com/proxy/6ZjCcwfnvCXCKx4HQaWkjAl1o_D1XoDFFGJSBL03-aztsfaQcShoRG8kLHZzoZCwkUf4wRNnsQnJveeG_b2ABv-rD0bbseVDvCJRB2hkJGtuobjEEb6Yj4i16U9iYIim78LJmJWY0PAs-PjCndNxsPgC0vQt4l-u"
 
@@ -51,6 +53,7 @@ function updateAndDraw(sprite) {
   image(sprite.img, sprite.x, sprite.y, sprite.width, sprite.height)
   //increase y by vy
   sprite.y += sprite.vy
+  sprite.x += sprite.vx
   
   collideWorldBounds(sprite)
 }
@@ -60,4 +63,18 @@ function collideWorldBounds(sprite) {
      sprite.y < world.top) {
     sprite.vy = -sprite.vy
   }
-} 
+}
+
+function mouseReleased() {
+  //console.log("click")
+  fireCannon()
+}
+
+function fireCannon() {
+  cannonball.x = cannon.x + 5
+  cannonball.y = cannon.y
+  cannonball.vx = 2
+  cannonball.vy = cannon.vy
+  
+}
+
