@@ -8,6 +8,12 @@ cannon.vy = 2
 cannon.src = "https://cdn.iconscout.com/icon/premium/png-512-thumb/cannon-18-569875.png"
 
 let target = {}
+target.x = 350
+target.y = 100
+target.width = 40
+target.height = 40
+target.vy = -2
+target.src = "https://lh3.googleusercontent.com/proxy/6ZjCcwfnvCXCKx4HQaWkjAl1o_D1XoDFFGJSBL03-aztsfaQcShoRG8kLHZzoZCwkUf4wRNnsQnJveeG_b2ABv-rD0bbseVDvCJRB2hkJGtuobjEEb6Yj4i16U9iYIim78LJmJWY0PAs-PjCndNxsPgC0vQt4l-u"
 
 let cball = {}
 cball.x = 0
@@ -23,6 +29,7 @@ let world = {}
 function preload() {
   cannon.img = loadImage(cannon.src)
   cball.img = loadImage(cball.src)
+  target.img = loadImage(target.src)
 }
 
 function setup() {
@@ -34,6 +41,7 @@ function draw() {
   
   updateAndDraw(cannon)
   updateAndDraw(cball)
+  updateAndDraw(target)
 }
 
 function updateAndDraw(sprite) {
@@ -42,9 +50,3 @@ function updateAndDraw(sprite) {
   //increase y by vy
   sprite.y += sprite.vy
 }
-
-
-
-
-
-
