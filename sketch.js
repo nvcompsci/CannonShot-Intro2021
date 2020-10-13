@@ -14,7 +14,16 @@ target.y = 50
 target.width = 40
 target.height = 40
 target.vy = -2
-target.src = "https://lh3.googleusercontent.com/proxy/15Uuw1SvhtOANNTvx1O0gLDowL8ZUftQBU2AR7zs14pap2GPSDn68Cj8izOQbFO_X6QfuihvcygXjDyPAE4RiJdxyrcSwLPrWvQvP57MFiN4FpPP4ZcFJABhOyEijVkczPF5c5FiqRyxenIaM9cLaOrzZW68000P"
+target.src = "https://lh3.googleusercontent.com/proxy/6ZjCcwfnvCXCKx4HQaWkjAl1o_D1XoDFFGJSBL03-aztsfaQcShoRG8kLHZzoZCwkUf4wRNnsQnJveeG_b2ABv-rD0bbseVDvCJRB2hkJGtuobjEEb6Yj4i16U9iYIim78LJmJWY0PAs-PjCndNxsPgC0vQt4l-u"
+
+let cannonball = {}
+cannonball.x = 0
+cannonball.y = 0
+cannonball.width = 30
+cannonball.height = 30
+cannonball.vy = 1
+cannonball.vx = 2
+cannonball.src = "https://cdn4.iconfinder.com/data/icons/pirate-3/512/as_1119-512.png"
 
 let world = {}
 world.top = 0
@@ -23,6 +32,7 @@ world.bottom = 400
 function preload() {
   cannon.img = loadImage(cannon.src)
   target.img = loadImage(target.src)
+  cannonball.img = loadImage(cannonball.src)
 }
 
 function setup() {
@@ -34,6 +44,7 @@ function draw() {
   
   updateAndDraw(cannon)
   updateAndDraw(target)
+  updateAndDraw(cannonball)
 }
 
 function updateAndDraw(sprite) {
