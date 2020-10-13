@@ -7,6 +7,7 @@ cannon.width = 75
 cannon.height = 25
 cannon.vx = 0
 cannon.vy = 2
+cannon.charge = 0
 cannon.src = "https://cdn.iconscout.com/icon/premium/png-512-thumb/cannon-18-569875.png"
 
 let target = {}
@@ -19,12 +20,12 @@ target.vy = -2
 target.src = "https://lh3.googleusercontent.com/proxy/6ZjCcwfnvCXCKx4HQaWkjAl1o_D1XoDFFGJSBL03-aztsfaQcShoRG8kLHZzoZCwkUf4wRNnsQnJveeG_b2ABv-rD0bbseVDvCJRB2hkJGtuobjEEb6Yj4i16U9iYIim78LJmJWY0PAs-PjCndNxsPgC0vQt4l-u"
 
 let cannonball = {}
-cannonball.x = 0
-cannonball.y = 0
+cannonball.x = -100
+cannonball.y = -100
 cannonball.width = 30
 cannonball.height = 30
-cannonball.vy = 1
-cannonball.vx = 2
+cannonball.vy = 0
+cannonball.vx = 0
 cannonball.src = "https://cdn4.iconfinder.com/data/icons/pirate-3/512/as_1119-512.png"
 
 let world = {}
@@ -47,6 +48,10 @@ function draw() {
   updateAndDraw(cannon)
   updateAndDraw(target)
   updateAndDraw(cannonball)
+  
+  if (mouseIsPressed) {
+      cannon.charge += 1
+  }
 }
 
 function updateAndDraw(sprite) {
@@ -65,15 +70,21 @@ function collideWorldBounds(sprite) {
   }
 }
 
+function mousePressed() {
+  //background("green")
+  cannon.charge += 1
+}
+
 function mouseReleased() {
   //console.log("click")
+  //background("red")
   fireCannon()
 }
 
 function fireCannon() {
   cannonball.x = cannon.x + 5
   cannonball.y = cannon.y
-  cannonball.vx = 2
+  cannonball.vx = cannon.charge
   cannonball.vy = cannon.vy
   
 }
