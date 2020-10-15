@@ -19,6 +19,7 @@ target.vx = 0
 target.vy = -2
 target.src = "https://lh3.googleusercontent.com/proxy/6ZjCcwfnvCXCKx4HQaWkjAl1o_D1XoDFFGJSBL03-aztsfaQcShoRG8kLHZzoZCwkUf4wRNnsQnJveeG_b2ABv-rD0bbseVDvCJRB2hkJGtuobjEEb6Yj4i16U9iYIim78LJmJWY0PAs-PjCndNxsPgC0vQt4l-u"
 
+
 let cannonball = {}
 cannonball.x = -100
 cannonball.y = -100
@@ -31,10 +32,11 @@ cannonball.src = "https://cdn4.iconfinder.com/data/icons/pirate-3/512/as_1119-51
 let world = {}
 world.top = 0
 world.bottom = 400
+world.gravity = 0.5
 
 function preload() {
   cannon.img = loadImage(cannon.src)
-  target.img = loadImage(target.src)
+  //target.img = loadImage(target.src)
   cannonball.img = loadImage(cannonball.src)
 }
 
@@ -49,13 +51,22 @@ function draw() {
   updateAndDraw(target)
   updateAndDraw(cannonball)
   
-  if (mouseIsPressed) {
-      cannon.charge += 1
+  applyGravity(cannonball)
+  
+  cballVsTarget(cannonball, target)
+  
+  if (mouseIsPressed && cannon.charge <= 12) {
+      cannon.charge += 0.5
   }
 }
 
+function applyGravity(sprite) {
+  sprite.vy += world.gravity
+}
+
 function updateAndDraw(sprite) {
-  image(sprite.img, sprite.x, sprite.y, sprite.width, sprite.height)
+  //image(sprite.img, sprite.x, sprite.y, sprite.width, sprite.height)
+  rect(sprite.x, sprite.y, sprite.width, sprite.height)
   //increase y by vy
   sprite.y += sprite.vy
   sprite.x += sprite.vx
@@ -72,7 +83,6 @@ function collideWorldBounds(sprite) {
 
 function mousePressed() {
   //background("green")
-  cannon.charge += 1
 }
 
 function mouseReleased() {
@@ -87,5 +97,11 @@ function fireCannon() {
   cannonball.vx = cannon.charge
   cannonball.vy = cannon.vy
   
+  cannon.charge = 0
 }
 
+function cballVsTarget(c, t) {
+  if (dist(c.x, c.y, t.x, t.y) < c.width + t.width) {
+    console.log("hit")
+  }
+}
