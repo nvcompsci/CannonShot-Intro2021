@@ -1,28 +1,31 @@
-//define objects and properties
 let cannon = {}
+//x, y, width, height, vy
 cannon.x = 0
 cannon.y = 200
-cannon.width = 75
-cannon.height = 25
+cannon.width = 100
+cannon.height = 75
 cannon.vy = 2
-cannon.src = "https://cdn.iconscout.com/icon/premium/png-512-thumb/cannon-18-569875.png"
+cannon.vx = 0
+cannon.charge = 0
+cannon.src = "https://raw.githubusercontent.com/nvcompsci/CannonShot-Intro2021/main/cannon.png"
+
+let cball = {}
+cball.x = 50
+cball.y = 100
+cball.width = 30
+cball.height = 30
+cball.vy = 3
+cball.vx = 0
+cball.src = "https://raw.githubusercontent.com/nvcompsci/CannonShot-Intro2021/main/cannonball.png"
 
 let target = {}
 target.x = 350
-target.y = 100
-target.width = 40
-target.height = 40
-target.vy = -2
-target.src = "https://lh3.googleusercontent.com/proxy/6ZjCcwfnvCXCKx4HQaWkjAl1o_D1XoDFFGJSBL03-aztsfaQcShoRG8kLHZzoZCwkUf4wRNnsQnJveeG_b2ABv-rD0bbseVDvCJRB2hkJGtuobjEEb6Yj4i16U9iYIim78LJmJWY0PAs-PjCndNxsPgC0vQt4l-u"
-
-let cball = {}
-cball.x = 0
-cball.y = 200
-cball.width = 20
-cball.height = 20
-cball.vx = 2
-cball.vy = 2
-cball.src = "https://cdn4.iconfinder.com/data/icons/pirate-3/512/as_1119-512.png"
+target.y = 300
+target.width = 50
+target.height = 50
+target.vy = 2
+target.vx = 0
+target.src = "https://raw.githubusercontent.com/nvcompsci/CannonShot-Intro2021/main/target.png"
 
 let world = {}
 
