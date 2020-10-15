@@ -5,6 +5,8 @@ cannon.y = 200
 cannon.width = 100
 cannon.height = 75
 cannon.vy = 2
+cannon.vx = 0
+cannon.charge = 0
 cannon.src = "https://raw.githubusercontent.com/nvcompsci/CannonShot-Intro2021/main/cannon.png"
 
 let cannonBall = {}
@@ -13,6 +15,7 @@ cannonBall.y = 100
 cannonBall.width = 30
 cannonBall.height = 30
 cannonBall.vy = 3
+cannonBall.vx = 0
 cannonBall.src = "https://raw.githubusercontent.com/nvcompsci/CannonShot-Intro2021/main/cannonball.png"
 
 let target = {}
@@ -21,9 +24,11 @@ target.y = 300
 target.width = 50
 target.height = 50
 target.vy = 2
+target.vx = 0
 target.src = "https://raw.githubusercontent.com/nvcompsci/CannonShot-Intro2021/main/target.png"
 
 let world = {}
+world.gravity = 0.2
 
 function preload() {
   cannon.img = loadImage(cannon.src)
@@ -41,6 +46,12 @@ function draw() {
   updateAndDraw(cannon)
   updateAndDraw(cannonBall)
   updateAndDraw(target)
+  
+  applyGravity(cannonBall)
+  
+  if (mouseIsPressed == true) {
+    cannon.charge += 0.5
+  }
 }
 
 function updateAndDraw(sprite) {
@@ -49,6 +60,7 @@ function updateAndDraw(sprite) {
   
   //move cannon: y increases by vy
   sprite.y += sprite.vy
+  sprite.x += sprite.vx
   
   //bounce off top and bottom
   if (sprite.y > height - sprite.height ||
@@ -56,3 +68,24 @@ function updateAndDraw(sprite) {
     sprite.vy = -sprite.vy
   }
 }
+
+function applyGravity(sprite) {
+  sprite.vy += world.gravity
+}
+
+function fireCannon() {
+  cannonBall.x = cannon.x + cannon.width
+  cannonBall.y = cannon.y - 10
+  cannonBall.vy = cannon.vy
+  cannonBall.vx = cannon.charge
+  
+  cannon.charge = 0
+}
+
+function mouseReleased() {
+  fireCannon()
+}
+
+
+
+
