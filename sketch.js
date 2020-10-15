@@ -7,11 +7,12 @@ cannon.width = 100
 cannon.height = 75
 cannon.vy = 2
 cannon.vx = 0
+cannon.charge = 0
 cannon.src = "https://lh3.googleusercontent.com/proxy/HdmhTrrAWPEqA1TdOBijRVjHbVunqQ70xtUJE0UscOBxlRNfUPiqWdDpVNtkSU4kw8OhULr1optoRabVCebCyxC6cd0w-v0"
 
 let cannonBall = {}
-cannonBall.x = 100
-cannonBall.y = 20
+cannonBall.x = -300
+cannonBall.y = -300
 cannonBall.width = 30
 cannonBall.height = 30
 cannonBall.vy = 0
@@ -27,6 +28,7 @@ target.vy = -2
 target.vx = 0
 
 let world = {}
+world.gravity = 0.2
 
 function preload() {
   //cannon.img = loadImage(cannon.src)
@@ -43,6 +45,16 @@ function draw() {
   updateAndDraw(cannon)
   updateAndDraw(cannonBall)
   updateAndDraw(target)
+  
+  applyGravity(cannonBall)
+  
+  if (mouseIsPressed == true) {
+    cannon.charge += 2
+  }
+}
+
+function applyGravity(sprite) {
+  sprite.vy += world.gravity
 }
 
 function updateAndDraw(sprite) {
@@ -64,7 +76,8 @@ function fireCannon() {
   cannonBall.x = cannon.x
   cannonBall.y = cannon.y
   cannonBall.vy = cannon.vy
-  cannonBall.vx = 3
+  cannonBall.vx = cannon.charge
+  cannon.charge = 0
 }
 
 function mouseReleased() {
