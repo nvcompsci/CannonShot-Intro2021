@@ -31,9 +31,9 @@ let world = {}
 world.gravity = 0.2
 
 function preload() {
-  //cannon.img = loadImage(cannon.src)
-  //cannonBall.img = loadImage(cannonBall.src)
-  //target.img = loadImage(target.src)
+  cannon.img = loadImage(cannon.src)
+  cannonBall.img = loadImage(cannonBall.src)
+  target.img = loadImage(target.src)
 }
 
 function setup() {
@@ -58,8 +58,8 @@ function applyGravity(sprite) {
 }
 
 function updateAndDraw(sprite) {
-  rect(sprite.x, sprite.y, sprite.width, sprite.height)
-  //image(sprite.img, sprite.x, sprite.y, sprite.width, sprite.height)
+  //rect(sprite.x, sprite.y, sprite.width, sprite.height)
+  image(sprite.img, sprite.x, sprite.y, sprite.width, sprite.height)
   
   //move down, increase y with vy
   sprite.y += sprite.vy
@@ -83,7 +83,4 @@ function fireCannon() {
 function mouseReleased() {
   fireCannon()
 }
-
-
-
 
