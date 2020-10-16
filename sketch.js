@@ -52,6 +52,8 @@ function draw() {
   if (mouseIsPressed == true) {
     cannon.charge += 0.5
   }
+  
+  cballVsTarget(cannonBall, target)
 }
 
 function updateAndDraw(sprite) {
@@ -86,6 +88,8 @@ function mouseReleased() {
   fireCannon()
 }
 
-
-
-
+function cballVsTarget(c, t) {
+  if (dist(c.x, c.y, t.x, t.y) < c.width / 2 + t.width / 2) {
+    console.log("hit")
+  }
+}
