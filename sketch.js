@@ -51,6 +51,8 @@ function draw() {
   if (mouseIsPressed == true) {
     cannon.charge += 2
   }
+  
+  cballVsTarget(cannonBall, target)
 }
 
 function applyGravity(sprite) {
@@ -82,5 +84,11 @@ function fireCannon() {
 
 function mouseReleased() {
   fireCannon()
+}
+
+function cballVsTarget(c, t) {
+  if (dist(c.x, c.y, t.x, t.y) < c.width/2 + t.width/2) {
+    console.log("hit")
+  }
 }
 
