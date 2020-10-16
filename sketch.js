@@ -19,6 +19,7 @@ cannonBall.vx = 0
 cannonBall.src = "https://raw.githubusercontent.com/nvcompsci/CannonShot-Intro2021/main/cannonball.png"
 
 let target = {}
+target.active = true
 target.x = 350
 target.y = 300
 target.width = 50
@@ -45,7 +46,11 @@ function draw() {
   
   updateAndDraw(cannon)
   updateAndDraw(cannonBall)
-  updateAndDraw(target)
+  if (target.active == true) {
+    updateAndDraw(target)
+    cballVsTarget(cannonBall, target)
+  }
+  
   
   applyGravity(cannonBall)
   
@@ -53,7 +58,7 @@ function draw() {
     cannon.charge += 0.5
   }
   
-  cballVsTarget(cannonBall, target)
+  
 }
 
 function updateAndDraw(sprite) {
@@ -91,5 +96,6 @@ function mouseReleased() {
 function cballVsTarget(c, t) {
   if (dist(c.x, c.y, t.x, t.y) < c.width / 2 + t.width / 2) {
     console.log("hit")
+    t.active = false
   }
 }
