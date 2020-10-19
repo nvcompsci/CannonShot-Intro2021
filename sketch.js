@@ -33,6 +33,8 @@ world.top = 0
 world.bottom = 400
 world.gravity = 0.5
 
+let score = 0
+
 function preload() {
   cannon.img = loadImage(cannon.src)
   target.img = loadImage(target.src)
@@ -55,7 +57,7 @@ function draw() {
   updateAndDraw(cannonball)
   
   applyGravity(cannonball)
-  text("score",0,0)
+  text("Score: "+score,5,20)
   
   
   if (mouseIsPressed && cannon.charge <= 12) {
@@ -104,8 +106,9 @@ function fireCannon() {
 }
 
 function cballVsTarget(c, t) {
-  if (dist(c.x, c.y, t.x, t.y) < c.width + t.width) {
+  if (dist(c.x, c.y, t.x, t.y) < c.width/2 + t.width/2) {
     console.log("hit")
     t.active = false
+    score += 10
   }
 }
