@@ -21,6 +21,8 @@ cannonball.src = "https://raw.githubusercontent.com/nvcompsci/CannonShot-Intro20
 let target = {}
 target.x = 350
 target.y = 300
+//boolean
+target.active = true
 target.width = 50
 target.height = 50
 target.vy = 2
@@ -46,7 +48,10 @@ function draw() {
   background("white");
   
   updateAndDraw(cannon)
-  updateAndDraw(target)
+  if (target.active == true) {
+    updateAndDraw(target)
+  }
+  
   updateAndDraw(cannonball)
   
   applyGravity(cannonball)
@@ -99,8 +104,9 @@ function fireCannon() {
 }
 
 function cballVsTarget(c,t) {
-  if (dist(c.x,c.y,t.x,t.y) < c.width/2 + t.width/2) {
+  if (dist(c.x,c.y,t.x,t.y) < c.width/2 + t.width/2) {    
     console.log("hit")
+    t.active = false
   }
 }
 
