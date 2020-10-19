@@ -9,14 +9,14 @@ cannon.vx = 0
 cannon.charge = 0
 cannon.src = "https://raw.githubusercontent.com/nvcompsci/CannonShot-Intro2021/main/cannon.png"
 
-let cball = {}
-cball.x = 50
-cball.y = 100
-cball.width = 30
-cball.height = 30
-cball.vy = 3
-cball.vx = 0
-cball.src = "https://raw.githubusercontent.com/nvcompsci/CannonShot-Intro2021/main/cannonball.png"
+let cannonball = {}
+cannonball.x = 50
+cannonball.y = 100
+cannonball.width = 30
+cannonball.height = 30
+cannonball.vy = 3
+cannonball.vx = 0
+cannonball.src = "https://raw.githubusercontent.com/nvcompsci/CannonShot-Intro2021/main/cannonball.png"
 
 let target = {}
 target.x = 350
@@ -28,11 +28,14 @@ target.vx = 0
 target.src = "https://raw.githubusercontent.com/nvcompsci/CannonShot-Intro2021/main/target.png"
 
 let world = {}
+world.top = 0
+world.bottom = 400
+world.gravity = 0.5
 
 function preload() {
   cannon.img = loadImage(cannon.src)
-  cball.img = loadImage(cball.src)
   target.img = loadImage(target.src)
+  cannonball.img = loadImage(cannonball.src)
 }
 
 function setup() {
@@ -43,8 +46,20 @@ function draw() {
   background("white");
   
   updateAndDraw(cannon)
-  updateAndDraw(cball)
   updateAndDraw(target)
+  updateAndDraw(cannonball)
+  
+  applyGravity(cannonball)
+  
+  cballVsTarget(cannonball, target)
+  
+  if (mouseIsPressed && cannon.charge <= 12) {
+      cannon.charge += 0.5
+  }
+}
+
+function applyGravity(sprite) {
+  sprite.vy += world.gravity
 }
 
 function updateAndDraw(sprite) {
@@ -52,4 +67,42 @@ function updateAndDraw(sprite) {
   //rect(sprite.x, sprite.y, sprite.width, sprite.height)
   //increase y by vy
   sprite.y += sprite.vy
+  sprite.x += sprite.vx
+  
+  collideWorldBounds(sprite)
 }
+
+function collideWorldBounds(sprite) {
+  if (sprite.y > world.bottom ||
+     sprite.y < world.top) {
+    sprite.vy = -sprite.vy
+  }
+}
+
+function mousePressed() {
+  //background("green")
+}
+
+function mouseReleased() {
+  //console.log("click")
+  //background("red")
+  fireCannon()
+}
+
+function fireCannon() {
+  cannonball.x = cannon.x + 5
+  cannonball.y = cannon.y
+  cannonball.vx = cannon.charge
+  cannonball.vy = cannon.vy
+  
+  cannon.charge = 0
+}
+
+function cballVsTarget(c,t) {
+  if (dist(c.x,c.y,t.x,t.y) < c.width/2 + t.width/2) {
+    console.log("hit")
+  }
+}
+
+
+
