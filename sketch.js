@@ -21,6 +21,7 @@ cannonball.src = "https://raw.githubusercontent.com/nvcompsci/CannonShot-Intro20
 let target = {}
 target.x = 350
 target.y = 300
+target.active = true
 target.width = 50
 target.height = 50
 target.vy = 2
@@ -34,7 +35,7 @@ world.gravity = 0.5
 
 function preload() {
   cannon.img = loadImage(cannon.src)
-  //target.img = loadImage(target.src)
+  target.img = loadImage(target.src)
   cannonball.img = loadImage(cannonball.src)
 }
 
@@ -46,12 +47,16 @@ function draw() {
   background("white");
   
   updateAndDraw(cannon)
-  updateAndDraw(target)
+  if (target.active == true) {
+    updateAndDraw(target)
+    cballVsTarget(cannonball, target)
+  }
+  
   updateAndDraw(cannonball)
   
   applyGravity(cannonball)
+  text("score",0,0)
   
-  cballVsTarget(cannonball, target)
   
   if (mouseIsPressed && cannon.charge <= 12) {
       cannon.charge += 0.5
@@ -63,8 +68,8 @@ function applyGravity(sprite) {
 }
 
 function updateAndDraw(sprite) {
-  //image(sprite.img, sprite.x, sprite.y, sprite.width, sprite.height)
-  rect(sprite.x, sprite.y, sprite.width, sprite.height)
+  image(sprite.img, sprite.x, sprite.y, sprite.width, sprite.height)
+  //rect(sprite.x, sprite.y, sprite.width, sprite.height)
   //increase y by vy
   sprite.y += sprite.vy
   sprite.x += sprite.vx
@@ -101,5 +106,6 @@ function fireCannon() {
 function cballVsTarget(c, t) {
   if (dist(c.x, c.y, t.x, t.y) < c.width + t.width) {
     console.log("hit")
+    t.active = false
   }
 }
